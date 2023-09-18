@@ -172,6 +172,7 @@
 		dunst
 		llvmPackages.bintools
 		rustup
+		go
 		chezmoi
 		lazygit
 		pcmanfm
@@ -185,12 +186,16 @@
 		ueberzugpp
 		vifm-full
 		etcher
+		rofi-wayland
+		wofi
+		bemenu
+		brightnessctl
 		inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
 	];
 
 	environment.binsh = "${pkgs.dash}/bin/dash";
 
-	fonts.fonts = with pkgs; [
+	fonts.packages = with pkgs; [
 		nerdfonts
 	];
 
