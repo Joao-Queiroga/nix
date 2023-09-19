@@ -4,6 +4,11 @@
 
 { config, pkgs, inputs, ... }:
 
+let
+	python_packages = ps: with ps; [
+		django
+	];
+in
 {
 	imports =
 		[ # Include the results of the hardware scan.
@@ -155,7 +160,7 @@
 		wget
 		wbg
 		nodejs
-		python3
+		(python3.withPackages python_packages)
 		luajit
 		gopass
 		gopass-jsonapi
@@ -187,7 +192,6 @@
 		vifm-full
 		etcher
 		rofi-wayland
-		wofi
 		bemenu
 		brightnessctl
 		inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
