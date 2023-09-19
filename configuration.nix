@@ -80,7 +80,10 @@ in
 	services.xserver = {
 		enable = true;
 		displayManager = {
-				sddm.enable = true;
+				sddm = {
+					enable = true;
+					autoNumlock = true;
+				};
 				defaultSession = "none+awesome";
 		};
 
