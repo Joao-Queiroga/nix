@@ -7,6 +7,7 @@
 let
 	python_packages = ps: with ps; [
 		django
+		pip
 	];
 in
 {
