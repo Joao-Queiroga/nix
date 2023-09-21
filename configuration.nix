@@ -176,7 +176,7 @@ in
 		zip
 		xclip
 		wl-clipboard
-		foot
+		wezterm
 		wbg
 		dunst
 		llvmPackages.bintools
