@@ -172,6 +172,7 @@ in
 		btop
 		bat
 		lsd
+		killall
 		unzip
 		zip
 		xclip
