@@ -196,6 +196,8 @@ in
 		zathura
 		ueberzugpp
 		vifm-full
+		lf
+		(nnn.override { withNerdIcons = true; })
 		etcher
 		rofi-wayland
 		bemenu
