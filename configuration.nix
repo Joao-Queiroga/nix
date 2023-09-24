@@ -122,6 +122,7 @@ in
 		dconf.enable = true;
 		nm-applet.enable = true;
 		nix-ld.enable = true;
+		java.enable = true;
 		neovim = {
 			enable = true;
 			withPython3 = true;
@@ -190,7 +191,7 @@ in
 		pfetch
 		starship
 		gcc
-		openjdk
+		jdk
 		picom
 		dex
 		zathura
