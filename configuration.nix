@@ -175,6 +175,7 @@ in
 		bat
 		lsd
 		killall
+		file
 		unzip
 		zip
 		xclip
