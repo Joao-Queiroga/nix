@@ -197,6 +197,8 @@ in
 		dex
 		zathura
 		ueberzugpp
+		jq
+		hurl
 		vifm-full
 		lf
 		(nnn.override { withNerdIcons = true; })
