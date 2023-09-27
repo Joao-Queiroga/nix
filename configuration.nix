@@ -123,6 +123,7 @@ in
 		nm-applet.enable = true;
 		nix-ld.enable = true;
 		java.enable = true;
+		gamemode.enable = true;
 		neovim = {
 			enable = true;
 			withPython3 = true;
