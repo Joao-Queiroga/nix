@@ -55,7 +55,7 @@ in
 	};
 
 	nixpkgs.config.permittedInsecurePackages = [
-		"electron-12.2.3"
+		"electron-19.1.9"
 	];
 
 	# networking.hostName = "nixos"; # Define your hostname.
@@ -167,6 +167,7 @@ in
 		wget
 		wbg
 		nodejs
+		bun
 		(python3.withPackages python_packages)
 		luajit
 		gopass
@@ -193,7 +194,7 @@ in
 		pfetch
 		starship
 		gcc
-		jdk
+		openjdk
 		picom
 		dex
 		zathura
