@@ -129,7 +129,15 @@ in
 			package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 		};
 		waybar.enable = true;
+		thunar = {
+			enable = true;
+		};
 	};
+
+	# Enable GVFS (which manages automatic mounting of external drives, etc.)
+	services.gvfs.enable = true;
+	# Enable thumbler for thumbnails in thunar
+	services.tumbler.enable = true;
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.defaultUserShell = pkgs.zsh;
@@ -177,7 +185,6 @@ in
 		go
 		chezmoi
 		lazygit
-		pcmanfm
 		pfetch
 		starship
 		gcc
@@ -189,8 +196,6 @@ in
 		jq
 		hurl
 		vifm-full
-		lf
-		(nnn.override { withNerdIcons = true; })
 		etcher
 		rofi-wayland
 		bemenu
