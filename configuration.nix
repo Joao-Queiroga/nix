@@ -170,7 +170,7 @@ in
 		htop
 		btop
 		bat
-		lsd
+		eza
 		killall
 		file
 		unzip
