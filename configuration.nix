@@ -171,6 +171,7 @@ in
 		btop
 		bat
 		eza
+		ripgrep
 		killall
 		file
 		unzip
