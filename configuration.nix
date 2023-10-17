@@ -171,7 +171,7 @@ in
 		llvmPackages.bintools
 		rustup
 		go
-		chezmoi
+		yadm
 		lazygit
 		pfetch
 		starship
