@@ -166,6 +166,7 @@ in
 		xclip
 		wl-clipboard
 		alacritty
+		foot
 		wbg
 		dunst
 		llvmPackages.bintools
