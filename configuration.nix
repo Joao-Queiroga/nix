@@ -138,7 +138,7 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
-		brave
+		vivaldi
 		tmux
 		home-manager
 		vim
@@ -165,8 +165,7 @@ in
 		zip
 		xclip
 		wl-clipboard
-		alacritty
-		foot
+		wezterm
 		wbg
 		dunst
 		llvmPackages.bintools
