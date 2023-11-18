@@ -21,6 +21,7 @@
         modules = [
           { networking.hostName = hostname; }
           ./configuration.nix
+          ./${hostname}-config.nix
         ];
       };
     in
