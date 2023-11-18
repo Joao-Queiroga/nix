@@ -1,198 +1,206 @@
 { pkgs, inputs, ... }:
 let
-	python_packages = ps: with ps; [
-		django
-		pip
-	];
+  python_packages = ps: with ps; [
+    django
+    pip
+  ];
 in
 {
-	imports =
-		[ # Include the results of the hardware scan.
-			./hardware-configuration.nix
-		];
+  imports =
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+    ];
 
-	boot.loader = {
-		grub = {
-			enable = true;
-			device = "nodev";
-			efiSupport = true;
-			useOSProber = true;
-		};
-		efi = {
-			canTouchEfiVariables = true;
-			efiSysMountPoint = "/boot/efi";
-		};
-	};
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiSupport = true;
+      useOSProber = true;
+    };
+    efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
+    };
+  };
 
-	security.polkit.enable = true;
-	
-	systemd = {
-		user.services.polkit-gnome-authentication-agent-1 = {
-			description = "polkit-gnome-authentication-agent-1";
-			wantedBy = [ "graphical-session.target" ];
-			wants = [ "graphical-session.target" ];
-			after = [ "graphical-session.target" ];
-			serviceConfig = {
-				Type = "simple";
-				ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-				Restart = "on-failure";
-				RestartSec = 1;
-				TimeoutStopSec = 10;
-			};
-		};
-	};
+  security.polkit.enable = true;
 
-	nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-		experimental-features = [ "nix-command" "flakes" ];
-	};
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
 
-	nixpkgs.config.permittedInsecurePackages = [
-		"electron-19.1.9"
-	];
+  nix.settings = {
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
-	# networking.hostName = "nixos"; # Define your hostname.
-	networking.networkmanager.enable = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-19.1.9"
+  ];
 
-	time.timeZone = "Brazil/East";
+  networking.networkmanager.enable = true;
 
-	i18n.defaultLocale = "pt_BR.UTF-8";
-	console = {
-		font = "Lat2-Terminus16";
-		keyMap = "br-abnt2";
-	};
+  time.timeZone = "Brazil/East";
 
-	services.xserver = {
-		enable = true;
-		displayManager = {
-				sddm = {
-					enable = true;
-					autoNumlock = true;
-				};
-				defaultSession = "hyprland";
-		};
+  i18n.defaultLocale = "pt_BR.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "br-abnt2";
+  };
 
-		windowManager.awesome = {
-			enable = true;
-		};
-	};
+  services.xserver = {
+    enable = true;
+    displayManager = {
+      sddm = {
+        enable = true;
+        autoNumlock = true;
+      };
+      defaultSession = "hyprland";
+    };
 
-	services.xserver.layout = "br";
+    windowManager.awesome = {
+      enable = true;
+    };
+  };
 
-	# Enable sound.
-	security.rtkit.enable = true;
-	services.pipewire = {
-		enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-		pulse.enable = true;
-	};
+  services.xserver.layout = "br";
 
-	#Bluetooth
-	hardware.bluetooth.enable = true;
-	services.blueman.enable = true;
+  # Enable sound.
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
-	# Enable touchpad support (enabled default in most desktopManager).
-	services.xserver.libinput.enable = true;
+  # Sudo configuration
+  security.sudo = {
+    enable = true;
+    extraConfig = ''
+      		Defaults env_keep += "HOME"
+      		'';
+  };
 
-	programs = {
-		zsh.enable = true;
-		git.enable = true;
-		dconf.enable = true;
-		nm-applet.enable = true;
-		nix-ld.enable = true;
-		java.enable = true;
-		gamemode.enable = true;
-		neovim = {
-			enable = true;
-			withPython3 = true;
-			withNodeJs = true;
-			defaultEditor = true;
-		};
-		gnupg.agent = {
-			enable = true;
-			pinentryFlavor = "gnome3";
-		};
-		firefox.enable = true;
-		hyprland = {
-			enable = true;
-			package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-		};
-		thunar = {
-			enable = true;
-		};
-	};
+  #Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
-	# Enable GVFS (which manages automatic mounting of external drives, etc.)
-	services.gvfs.enable = true;
-	# Enable thumbler for thumbnails in thunar
-	services.tumbler.enable = true;
+  # Enable touchpad support (enabled default in most desktopManager).
+  services.xserver.libinput.enable = true;
 
-	# Define a user account. Don't forget to set a password with ‘passwd’.
-	users.defaultUserShell = pkgs.zsh;
-	users.users.joaoqueiroga = {
-		isNormalUser = true;
-		extraGroups = [ "wheel" "networkmanager" ];
-	};
+  programs = {
+    zsh.enable = true;
+    git.enable = true;
+    dconf.enable = true;
+    nm-applet.enable = true;
+    nix-ld.enable = true;
+    java.enable = true;
+    gamemode.enable = true;
+    neovim = {
+      enable = true;
+      withPython3 = true;
+      withNodeJs = true;
+      defaultEditor = true;
+    };
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "gnome3";
+    };
+    firefox.enable = true;
+    hyprland = {
+      enable = true;
+      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    };
+    thunar = {
+      enable = true;
+    };
+  };
 
-	environment.systemPackages = with pkgs; [
-		tmux
-		home-manager
-		vim
-		alsa-utils
-		networkmanagerapplet
-		pulsemixer
-		fish
-		wget
-		wbg
-		nodejs
-		bun
-		(python3.withPackages python_packages)
-		luajit
-		gopass
-		gopass-jsonapi
-		htop
-		btop
-		bat
-		eza
-		ripgrep
-		killall
-		file
-		unzip
-		zip
-		xclip
-		wl-clipboard
-		kitty
-		wbg
-		dunst
-		llvmPackages.bintools
-		rustup
-		go
-		lazygit
-		pfetch
-		starship
-		gcc
-		openjdk
-		picom
-		dex
-		zathura
-		ueberzugpp
-		jq
-		hurl
-		vifm-full
-		rofi-wayland
-		bemenu
-		brightnessctl
-	];
+  # Enable GVFS (which manages automatic mounting of external drives, etc.)
+  services.gvfs.enable = true;
+  # Enable thumbler for thumbnails in thunar
+  services.tumbler.enable = true;
 
-	environment.binsh = "${pkgs.dash}/bin/dash";
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.defaultUserShell = pkgs.zsh;
+  users.users.joaoqueiroga = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" ];
+  };
 
-	fonts.packages = with pkgs; [
-		nerdfonts
-	];
+  environment.systemPackages = with pkgs; [
+    tmux
+    home-manager
+    vim
+    alsa-utils
+    networkmanagerapplet
+    pulsemixer
+    fish
+    wget
+    wbg
+    nodejs
+    bun
+    (python3.withPackages python_packages)
+    luajit
+    gopass
+    gopass-jsonapi
+    htop
+    btop
+    bat
+    eza
+    ripgrep
+    killall
+    file
+    unzip
+    zip
+    xclip
+    wl-clipboard
+    kitty
+    wbg
+    dunst
+    llvmPackages.bintools
+    rustup
+    go
+    lazygit
+    pfetch
+    starship
+    gcc
+    openjdk
+    picom
+    dex
+    zathura
+    ueberzugpp
+    jq
+    hurl
+    vifm-full
+    rofi-wayland
+    bemenu
+    brightnessctl
+  ];
 
-	system.stateVersion = "23.05";
+  environment.binsh = "${pkgs.dash}/bin/dash";
 
-	nixpkgs.config.allowUnfree = true;
+  fonts.packages = with pkgs; [
+    nerdfonts
+  ];
+
+  system.stateVersion = "23.05";
+
+  nixpkgs.config.allowUnfree = true;
 }
