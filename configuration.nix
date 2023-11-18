@@ -119,7 +119,6 @@ in
 			enable = true;
 			package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 		};
-		waybar.enable = true;
 		thunar = {
 			enable = true;
 		};
@@ -138,7 +137,6 @@ in
 	};
 
 	environment.systemPackages = with pkgs; [
-		vivaldi
 		tmux
 		home-manager
 		vim
@@ -165,13 +163,12 @@ in
 		zip
 		xclip
 		wl-clipboard
-		wezterm
+		kitty
 		wbg
 		dunst
 		llvmPackages.bintools
 		rustup
 		go
-		yadm
 		lazygit
 		pfetch
 		starship
@@ -184,11 +181,9 @@ in
 		jq
 		hurl
 		vifm-full
-		etcher
 		rofi-wayland
 		bemenu
 		brightnessctl
-		inputs.split-monitor-workspaces.packages.${pkgs.system}.split-monitor-workspaces
 	];
 
 	environment.binsh = "${pkgs.dash}/bin/dash";
