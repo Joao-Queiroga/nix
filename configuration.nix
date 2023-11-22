@@ -131,6 +131,9 @@ in
   # Enable thumbler for thumbnails in thunar
   services.tumbler.enable = true;
 
+  # Enable Upower
+  services.upower.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.defaultUserShell = pkgs.zsh;
   users.users.joaoqueiroga = {
