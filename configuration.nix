@@ -176,7 +176,6 @@ in
     go
     lazygit
     pfetch
-    starship
     gcc
     openjdk
     picom
