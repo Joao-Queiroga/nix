@@ -154,6 +154,8 @@ in
     nodejs
     bun
     (python3.withPackages python_packages)
+    php83
+    php83Packages.composer
     luajit
     gopass
     gopass-jsonapi
