@@ -142,15 +142,11 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    tmux
-    home-manager
     vim
     alsa-utils
     networkmanagerapplet
     pulsemixer
-    fish
     wget
-    wbg
     nodejs
     bun
     (python3.withPackages python_packages)
@@ -161,35 +157,23 @@ in
     gopass-jsonapi
     htop
     btop
-    bat
-    eza
-    ripgrep
     killall
     file
     unzip
     zip
     xclip
     wl-clipboard
-    kitty
-    wbg
-    dunst
     llvmPackages.bintools
     rustup
     go
     lazygit
-    pfetch
     gcc
     openjdk
-    picom
     dex
-    zathura
     ueberzugpp
     jq
     hurl
     vifm-full
-    rofi-wayland
-    bemenu
-    brightnessctl
   ];
 
   environment.binsh = "${pkgs.dash}/bin/dash";
