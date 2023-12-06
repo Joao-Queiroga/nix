@@ -116,7 +116,10 @@ in
       enable = true;
       pinentryFlavor = "gnome3";
     };
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      package = pkgs.firefox-bin;
+    };
     hyprland = {
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
