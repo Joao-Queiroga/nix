@@ -1,11 +1,6 @@
 { pkgs, inputs, ... }:
-let
-  python_packages = ps: with ps; [
-    django
-    pip
-  ];
-in
-{
+let python_packages = ps: with ps; [ django pip ];
+in {
   boot.loader = {
     grub = {
       enable = true;
@@ -29,7 +24,8 @@ in
       after = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart =
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
@@ -39,13 +35,12 @@ in
 
   nix.settings = {
     substituters = [ "https://hyprland.cachix.org" ];
-    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+    trusted-public-keys =
+      [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     experimental-features = [ "nix-command" "flakes" ];
   };
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-19.1.9"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [ "electron-19.1.9" ];
 
   networking.networkmanager.enable = true;
 
@@ -67,9 +62,7 @@ in
       defaultSession = "hyprland";
     };
 
-    windowManager.awesome = {
-      enable = true;
-    };
+    windowManager.awesome = { enable = true; };
   };
 
   services.xserver.layout = "br";
@@ -87,8 +80,8 @@ in
   security.sudo = {
     enable = true;
     extraConfig = ''
-      		Defaults env_keep += "HOME"
-      		'';
+      Defaults env_keep += "HOME"
+    '';
   };
 
   #Bluetooth
@@ -99,7 +92,10 @@ in
   services.xserver.libinput.enable = true;
 
   programs = {
-    zsh.enable = true;
+    zsh = {
+      enable = true;
+      enableCompletion = false;
+    };
     git.enable = true;
     dconf.enable = true;
     nm-applet.enable = true;
@@ -124,9 +120,7 @@ in
       enable = true;
       package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     };
-    thunar = {
-      enable = true;
-    };
+    thunar = { enable = true; };
   };
 
   # Enable GVFS (which manages automatic mounting of external drives, etc.)
@@ -181,9 +175,7 @@ in
 
   environment.binsh = "${pkgs.dash}/bin/dash";
 
-  fonts.packages = with pkgs; [
-    nerdfonts
-  ];
+  fonts.packages = with pkgs; [ nerdfonts ];
 
   system.stateVersion = "23.11";
 
