@@ -77,12 +77,7 @@ in {
   };
 
   # Sudo configuration
-  security.sudo = {
-    enable = true;
-    extraConfig = ''
-      Defaults env_keep += "HOME"
-    '';
-  };
+  security.sudo.enable = true;
 
   #Bluetooth
   hardware.bluetooth.enable = true;
@@ -112,14 +107,7 @@ in {
       enable = true;
       pinentryFlavor = "gnome3";
     };
-    firefox = {
-      enable = true;
-      package = pkgs.firefox-bin;
-    };
-    hyprland = {
-      enable = true;
-      package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    };
+    hyprland = { enable = true; };
     thunar = { enable = true; };
   };
 
@@ -163,7 +151,6 @@ in {
     llvmPackages.bintools
     rustup
     go
-    lazygit
     gcc
     openjdk
     dex
