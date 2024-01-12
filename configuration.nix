@@ -97,12 +97,6 @@ in {
     nix-ld.enable = true;
     java.enable = true;
     gamemode.enable = true;
-    neovim = {
-      enable = true;
-      withPython3 = true;
-      withNodeJs = true;
-      defaultEditor = true;
-    };
     gnupg.agent = {
       enable = true;
       pinentryFlavor = "gnome3";
