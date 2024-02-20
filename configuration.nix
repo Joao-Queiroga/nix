@@ -93,6 +93,7 @@ in {
     };
     git.enable = true;
     dconf.enable = true;
+    droidcam.enable = true;
     nm-applet.enable = true;
     nix-ld.enable = true;
     java.enable = true;
