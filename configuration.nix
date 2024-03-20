@@ -43,6 +43,16 @@ in {
   nixpkgs.config.permittedInsecurePackages = [ "electron-19.1.9" ];
 
   networking.networkmanager.enable = true;
+  networking.firewall = {
+    allowedTCPPortRanges = [{
+      from = 1714;
+      to = 1764;
+    }];
+    allowedUDPPortRanges = [{
+      from = 1714;
+      to = 1764;
+    }];
+  };
 
   time.timeZone = "Brazil/East";
 
@@ -100,7 +110,7 @@ in {
     gamemode.enable = true;
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "gnome3";
+      pinentryPackage = pkgs.pinentry-gnome3;
     };
     hyprland = { enable = true; };
     thunar = { enable = true; };
@@ -147,6 +157,7 @@ in {
     rustup
     go
     gcc
+    glibc
     openjdk
     dex
     ueberzugpp
