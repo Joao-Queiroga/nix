@@ -75,7 +75,7 @@ in {
     windowManager.awesome = { enable = true; };
   };
 
-  services.xserver.layout = "br";
+  services.xserver.xkb.layout = "br";
 
   # Enable sound.
   security.rtkit.enable = true;
@@ -167,6 +167,8 @@ in {
   ];
 
   environment.binsh = "${pkgs.dash}/bin/dash";
+
+  environment.variables = { XKB_DEFAULT_LAYOUT = "br"; };
 
   fonts.packages = with pkgs; [ nerdfonts ];
 
