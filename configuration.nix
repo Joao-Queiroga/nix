@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }:
 let python_packages = ps: with ps; [ django pip ];
 in {
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.loader = {
     grub = {
       enable = true;
