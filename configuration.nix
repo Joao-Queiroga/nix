@@ -88,7 +88,12 @@ in {
   };
 
   # Sudo configuration
-  security.sudo.enable = true;
+  security.sudo = {
+    enable = true;
+    extraConfig = ''
+      Defaults        passprompt="Senha: "
+    '';
+  };
 
   #Bluetooth
   hardware.bluetooth.enable = true;
