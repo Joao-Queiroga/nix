@@ -65,15 +65,15 @@ in {
 
   services.xserver = {
     enable = true;
-    displayManager = {
-      sddm = {
-        enable = true;
-        autoNumlock = true;
-      };
-      defaultSession = "hyprland";
-    };
-
     windowManager.awesome = { enable = true; };
+  };
+
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      autoNumlock = true;
+    };
+    defaultSession = "hyprland";
   };
 
   services.xserver.xkb.layout = "br";
